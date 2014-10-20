@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Algorithms for Animation - 3 simple formulas to activate your UI</title>
+
+		<meta name="description" content="Algorithms for Animation - 3 simple formulas to activate your UI">
+		<meta name="author" content="Courtney Hemphill">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+		<link rel="stylesheet" href="css/animate.css">
+		<link rel="stylesheet" href="css/forwardjs.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+					
+		
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Algorithms for Animation</h1>
+					<h3>Simple formulas to activate your UI</h3>
+					
+				</section>
+				<section>
+					<img src="img/c5_16_9.png" class="fjs"/>
+					<small><a href="http://www.carbonfive.com">Courtney Hemphill</a> <br/> 						
+						<a href="mailto: courtney@carbonfive.com">courtney@carbonfive.com</a></small>
+						<p><a href="http://twitter.com/chemphill">@chemphill</a><br/>
+						#fwdjs</p></small>
+				</section>
+				<section data-state="summary">
+					<ul id="summaryMenu">
+						<li>Motion perception</li>
+						<li>Animations in interface design</li>						
+						<li>Formulas as foundation of animation</li>
+						<li>Frameworks</li>						
+					</ul>					
+				</section>
+				<section>
+					<h2>Design<span class="big" id="bigV">V</span>Dev</h2>		
+					
+				</section>
+				<section>	
+					<h2>Movement creates life</h2>					
+					<a href="http://www.youtube.com/embed/UY40DHs9vc4?start=35&end=55" target="_blank"><img src="img/Gertie.jpg" class="fjs"/></a>
+					<div class="attribution">Gertie the Dinosaur (Winsor McCay, 1914)<br/>https://www.youtube.com/watch?v=UY40DHs9vc4</div>
+					
+				</section>	
+				<section>
+					<img src="img/tweening.gif" class="fjs"/>
+					
+				</section>					
+				<section data-background="img/brain.jpg">
+					<h2 style="color: #fff; text-shadow: 2px 3px 3px #666;">Animations are cognitive aids</h2>									
+
+					
+				</section>
+				<section>
+					<div style="background: url('img/chair.jpg') no-repeat 50% 100%; height: 570px; width: 900px;">
+						<h2>Affordance, percieved affordance & signifiers</h2>
+					</div>
+							
+				</section>				
+				<section data-background="img/ferrari.jpg">
+					<h2 style="color: #ddd;">Motion detection</h2>										
+								
+				</section>
+				<section>
+					<iframe src="grid-demo.html" width="1020" height="600" frameborder="0"></iframe>
+				</section>					
+				<section>						
+					<div class="buttons">						
+						<div id="color-btn-demo" class="animated">Right</div>
+						<div id="motion-btn-demo">Right</div>
+					</div>
+					<script>
+						document.getElementById('motion-btn-demo').addEventListener('click', function(){this.className = 'animated shake'; this.innerHTML = 'Wrong';});;
+						document.getElementById('color-btn-demo').addEventListener('click', function(){this.className = 'wrong'; this.innerHTML = 'Wrong';});;
+					</script>
+				</section>
+				
+				
+				
+				<section>
+					<h2>Navigation</h2>
+				</section>
+				<section>
+					<img src="img/ScrollingNoAnimation.gif" class="fjs"/>
+					<div class="attribution">Adrian Zumbrunnen <br/> http://www.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/</div>
+				</section>
+				<section>
+					<img src="img/ScrollingAnimated.gif" class="fjs"/>
+					<div class="attribution">Adrian Zumbrunnen <br/> http://www.smashingmagazine.com/2013/10/23/smart-transitions-in-user-experience-design/</div>
+				</section>					
+			
+			
+				<section>
+					<h2>Progressive Disclosure</h2>
+				</section>
+				<section>
+					<img src="img/progressive_disclosure.gif" class="fjs"/>
+					<div class="attribution">Colin Garven <br/> https://dribbble.com/ColinGarven</div>
+				</section>					
+			
+			
+				<section>
+					<h2>Context</h2>
+				</section>
+				<section>
+					<img src="img/Twitter.gif" class="fjs"/>
+				</section>						
+		
+												
+				<section>
+					<h2>How do you communicate animation ideas?</h2>									
+					
+				</section>	
+				<section>
+					<h2>Math</h2>
+					<p>
+						<img src="img/math_heart.jpg" class="fjs"/>
+					</p>
+
+					
+				</section>					
+				<section>
+					<h2>Moving pixels</h2>
+<pre>
+var ball = document.getElementById('ball');					
+var start = 0;
+
+var basicAnimation = function (e) {							
+	<em>start += 12;</em>	     
+	<em>basic.style.left = start + "px";</em>
+	if (Math.abs(start) <= 800) { requestAnimationFrame(basicAnimation); }	
+}
+	
+</pre>
+
+		<div id="basic-one"></div>		
+		<span id="start-basic" style="color: gray;">></span>
+
+	 			<script>						
+					
+			var basic = document.getElementById('basic-one');
+
+			var currentPos = 0;
+			var startBasic = function (e) {
+
+			    currentPos += 12;
+		      
+			    basic.style.left = currentPos + "px";
+			    basic.innerHTML = currentPos;
+			    
+			    if (Math.abs(currentPos) <= 800) { requestAnimationFrame(startBasic); }				    
+
+			}
+									
+			document.getElementById('start-basic').addEventListener('click', startBasic);
+		</script>
+
+
+			
+		</section>											
+		<section>
+			<h2>The basics of animation: interpolation</h2>
+			<!-- <p>Start, Change, Time, Duration</p> -->
+			<pre>valueAtTime = (end - start) * time / duration + start</pre>
+			
+		</section>
+		<section>
+			<h2>Breaking it down to [0-1]</h2>		
+			<pre>valueAtTime = (end - start) * time / duration + start</pre>	
+			<p>change = end - start</p>			
+			<p>percent complete = time/duration</p>
+			
+		</section>		
+		<section>
+			<h2>Timing</h2>
+			<pre>
+
+var time, startTime;		
+
+var start = function () {
+	startTime = new Date().getTime();
+	run();
+}
+
+var run = function () {							
+	time = new Date().getTime() - startTime;
+	<em>div.style.left = 900 * time / 1000 + "px";</em>
+	if(value < 1) requestAnimationFrame(run);
+}
+	
+</pre>
+
+		<div id="basic2" class="pills"></div>		
+		<span id="start-basic2" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;					
+			var basic2 = document.getElementById('basic2');					
+			
+			var startBasic2 = function () {
+				startTime = new Date().getTime();
+				runBasic2();
+			}
+			
+
+			var runBasic2 = function (e) {							
+				time = new Date().getTime() - startTime;
+				value = time / 1000;
+				basic2.innerHTML = value;
+				basic2.style.left = 900 * value + "px";
+			    
+				if(value < 1) requestAnimationFrame(runBasic2);
+
+			}
+									
+			document.getElementById('start-basic2').addEventListener('click', startBasic2);
+		</script>
+
+
+		</section>	
+						
+		
+	<section>
+			<img src="img/percentage.png" class="fjs" style="width: 30%"/>
+<pre>
+	//valueAtTime = (end - start) * time / duration + start
+	<em>div.style.left = 900-0 * time / 1000 + 0 + "px";</em>
+	
+</pre>
+
+	 	<div id="basic3" class="pills"></div>		
+		<span id="start-basic3" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;					
+			var basic3 = document.getElementById('basic3');					
+			
+			var startBasic3 = function () {
+				startTime = new Date().getTime();
+				runBasic3();
+			}
+			
+
+			var runBasic3 = function (e) {							
+				time = new Date().getTime() - startTime;
+				value = time / 1000;
+				basic3.innerHTML = value;
+				basic3.style.left = 900 * value + "px";
+			    
+				if(value < 1) requestAnimationFrame(runBasic3);
+
+			}
+									
+			document.getElementById('start-basic3').addEventListener('click', startBasic3);
+		</script>
+
+	</section>	
+	<section>
+		<p>
+			<blockquote>"Using a term like nonlinear science is like referring to the bulk of zoology as the study of non-elephant animals."</blockquote>
+		</p>
+		- Stanislaw Ulam
+		
+	</section>	
+	<section>
+		<h2>Natural movement</h2>	
+		<p>Torque, drag, spin, friction</p>
+		
+	</section>
+	
+	<section>
+		<h2>Easing functions</h2>	
+		<img src="img/easeInCubic.png" class="fjs"/>
+		
+	</section>
+	
+	<section>
+		<h2>Easing</h2>	
+<pre>
+	valueAtTime = (end - start) * easingfunction([0-1]) + start		
+</pre>
+
+		<p>Change in property times (some float) plus beginning value.</p>
+		
+	</section>
+	<section>
+		<h2>Power Functions - EaseIn</h2>	
+		<img src="img/easeInCubic.png" class="fjs" style="width: 30%"/>
+	
+<pre>
+var run = function () {							
+  time = new Date().getTime() - startTime;  
+  div.style.left = 900 * <em>Math.pow(percentChange, 3)</em> + "px";
+  if(time / duration < 1) requestAnimationFrame(run);
+}
+</pre>
+
+		<div id="ease" class="pills"></div>		
+		<span id="start-ease" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;		
+			var duration = 1000;	
+			var startX = 0; endX = 900;
+
+			var startEase = function () {
+				startTime = new Date().getTime();
+				runEase();
+			}
+			var ease = document.getElementById('ease');					
+
+			var runEase = function (e) {							
+				time = new Date().getTime() - startTime;
+				value = time / duration;
+				ease.style.left = startX + (endX - startX) * Math.pow(value, 5) + "px";
+			    
+				if(value < 1) requestAnimationFrame(runEase);
+
+			}
+									
+			document.getElementById('start-ease').addEventListener('click', startEase);
+		</script>
+
+
+			
+		</section>	
+		<section>
+		<h2>Power Functions - EaseOut</h2>		
+		<img src="img/eastOutCubic.png" class="fjs" style="width: 30%"/>
+<pre>
+
+var run = function () {							
+  time = new Date().getTime() - startTime;  
+  div.style.left=(endX - startX)* <em>(1 - Math.pow(1 - (t / d), 3))</em> +startX+"px";
+  if(time / duration < 1) requestAnimationFrame(run);
+}
+	
+</code></pre>
+
+		<div id="easeOut" class="pills"></div>		
+		<span id="start-easeOut" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;		
+			var duration = 1000;	
+			var startX = 0; endX = 900;
+
+			var startEaseOut = function () {
+				startTime = new Date().getTime();
+				runEaseOut();
+			}
+			var ease = document.getElementById('ease');					
+
+			var runEaseOut = function (e) {							
+				time = new Date().getTime() - startTime;
+				value = time / duration;
+				easeOut.style.left = startX + (endX - startX) * (1 - Math.pow(1 - value, 3)) + "px";
+			    
+				if(value < 1) requestAnimationFrame(runEaseOut);
+
+			}
+									
+			document.getElementById('start-easeOut').addEventListener('click', startEaseOut);
+		</script>
+
+
+		</section>	
+	<section>
+		<h2>Trig! ... sine :)</h2>	
+		<img src="img/easeInSine.png" class="fjs" style="width: 30%"/>	
+<pre>
+var run = function () {							
+  time = new Date().getTime() - startTime;  
+  div.style.left=(endX - startX)* <em>Math.sin( t/d * Math.PI / 2 )</em> +startX+"px";
+  if(time / duration < 1) requestAnimationFrame(run);
+}
+</pre>
+
+		<div id="easeInSine" class="pills"></div>		
+		<span id="start-easeInSine" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;		
+			var duration = 1000;	
+			var startX = 0; endX = 900;
+
+			var startEaseInSine = function () {
+				startTime = new Date().getTime();
+				runEaseInSine();
+			}
+			var easeInSine = document.getElementById('easeInSine');					
+
+			var runEaseInSine = function (e) {							
+				time = new Date().getTime() - startTime;
+				value = time / duration;
+				easeInSine.style.left = startX + (endX - startX) * Math.sin( value * Math.PI / 2 ) + "px";
+			    
+				if(value < 1) requestAnimationFrame(runEaseInSine);
+
+			}
+									
+			document.getElementById('start-easeInSine').addEventListener('click', startEaseInSine);
+		</script>
+
+
+	</section>
+	<section>
+		<h2>Follow Through</h2>	
+		<p> > 1</p>		
+		
+	</section>
+	<section>
+		<h2>Elasticity</h2>	
+		<img src="img/easeOutBack.png" class="fjs" style="width: 30%"/>	
+<pre>
+var run = function () {							
+  time = new Date().getTime() - startTime;  
+  div.style.left=(endX - startX)* <em>k * k * ( ( s + 1 ) * k - s )</em> +startX+"px";
+  if(time / duration < 1) requestAnimationFrame(run);
+}
+</pre>
+
+		<div id="elastic" class="pills"></div>		
+		<span id="start-elastic" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;		
+			var duration = 1000;	
+			var startX = 0; endX = 900;
+
+			var s, a = 0.1, p = 0.4;			
+
+			var startElastic = function () {
+				startTime = new Date().getTime();
+				runElastic();
+			}
+			var elastic = document.getElementById('elastic');					
+
+			var runElastic = function (e) {		
+	
+				time = new Date().getTime() - startTime;
+				k = time / duration;
+				
+				var s = 1.70158;			    
+			    elastic.style.left = startX + (endX - startX) * (--k * k * ( ( s + 1 ) * k + s ) + 1) + "px";			    
+				if(k < 0) requestAnimationFrame(runElastic);
+
+			}
+									
+			document.getElementById('start-elastic').addEventListener('click', startElastic);
+		</script>
+
+
+	</section>
+
+	<section>
+		<h2>Bounce</h2>	
+		<img src="img/easeOutBounce.png" class="fjs" style="width: 30%"/>	
+<pre>
+var easeFunc = function(k) {
+if ( k < ( 1 / 2.75 ) ) { 
+return 7.5625 * k * k;
+} else if ( k < ( 2 / 2.75 ) ) { 
+return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+} else if ( k < ( 2.5 / 2.75 ) ) {	
+return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+} else { 
+return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375; }
+}
+div.style.left=(endX - startX)* <em>easeFunc(t/d)</em> +startX+"px";
+</pre>
+
+		<div id="bounce" class="pills"></div>		
+		<span id="start-bounce" style="color: gray;">></span>
+
+		<script>	
+			var time, startTime;		
+			var duration = 1000;	
+			var startX = 0; endX = 900;
+
+			
+
+			var startBounce = function () {
+				startTime = new Date().getTime();
+				runBounce();
+			}
+			var bounce = document.getElementById('bounce');					
+
+			var easeFunc = function(k) {
+				if ( k < ( 1 / 2.75 ) ) {
+
+				return 7.5625 * k * k;
+
+				} else if ( k < ( 2 / 2.75 ) ) {
+
+					return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+
+				} else if ( k < ( 2.5 / 2.75 ) ) {
+
+					return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+
+				} else {
+
+					return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+
+				}
+			}
+
+			var runBounce = function (e) {			
+				time = new Date().getTime() - startTime;
+				k = time / duration;								
+				bounce.style.left = startX + (endX - startX) * easeFunc(k) + "px";			    
+				if(k < 1) requestAnimationFrame(runBounce);
+			}
+									
+			document.getElementById('start-bounce').addEventListener('click', startBounce);
+		</script>
+
+
+	</section>
+	<section>		
+		<iframe src="birds-on-a-wire.html" width="920" height="800" frameborder="0"></iframe>
+		<small><a href="birds-on-a-wire.html" target="_blank">Birds on a Wire</a></small>
+	</section>
+	<section>
+		<h2>Tools</h2>			
+					
+		
+	</section>		
+	<section>
+		<h2>Software</h2>	
+		<ul>
+			<li>Adobe Edge Animate</li>
+			<li>Adobe After Effects</li>
+			<li>Flinto</li>
+			<li>Keynote</li>
+			<li>Quartz</li>
+		</ul>	
+		
+	</section>
+	<section>
+		<h2>JS Frameworks</h2>	
+		<ul>
+			<li>Framer.js</li>
+			<li>Tween.js</li>
+			<li>GSAP (Greensock)</li>
+			<li>jQuery</li>			
+		</ul>	
+		
+	</section>
+	<section>
+		<h2>CSS</h2>	
+		<ul>
+			<li>Animate.css</li>
+			<li>SASS/LESS mixins</li>			
+		</ul>
+		
+	</section>
+	<section>
+		<h2>Performance</h2>			
+		
+	</section>		
+	<section>
+		<h2>Go forth and animate!</h2>
+		
+	</section>
+	<section>
+		<h2>References</h2>
+		<ul>
+			<li><a href="www.robertpenner.com/easing/">Robert Penner - Easing Functions</em></a></li>
+			<li><a href="http://www.amazon.com/Design-Everyday-Things-Donald-Norman/dp/0465067107">Don Norman - The Design of Everyday Things</em></a></li>
+			<li><a href="http://www.google.com/design/spec/material-design/introduction.html">Google Material Design</em></a></li>
+			<li><a href="http://en.wikipedia.org/wiki/12_basic_principles_of_animation">Disney's Twelve Basic Principles of Animation</em></a></li>							
+			<li><a href="http://www.smashingmagazine.com/2012/10/30/motion-and-animation-a-new-mobile-ux-design-material/">Smashing Magazine - <em>A New Mobile UX Design Material</em></a></li>
+			<li><a href="http://carbonfive.github.io/html5-playground/birds-on-a-line.html">Birds on a Wire</em></a></li>				
+		</ul>
+	</section>
+	<section>
+		<img src="img/c5_16_9.png" class="fjs"/>
+		<small><a href="http://www.carbonfive.com">Courtney Hemphill</a> <br/> 
+			<a href="http://twitter.com/chemphill">@chemphill</a><br/>
+			<a href="mailto: courtney@carbonfive.com">courtney@carbonfive.com</a></small>
+	</section>
+	
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+			
+
+	
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+
+						
+		
+			Reveal.addEventListener( 'summary', function( event ) {	
+			console.log('here');					    
+			    var sum = document.getElementById('summaryMenu');
+			    var lis = sum.getElementsByTagName('li');
+			    lis[0].className = 'animated bounceInDown';
+			    lis[1].className = 'animated bounceInUp';
+			    lis[2].className = 'animated bounceInDown';
+			    lis[3].className = 'animated bounceInUp';
+			} );
+		
+
+		</script>
+
+	</body>
+</html>
